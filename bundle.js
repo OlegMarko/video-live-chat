@@ -73,16 +73,13 @@
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-navigator.mediaDevices.getUserMedia({
-    video: true,
-    audio: false
-}, (stream) => {
+
 
     var Peer = __webpack_require__(1);
     var peer = new Peer({
         initiator: location.hash === '#init',
         trickle: false,
-        stream: stream
+        // stream: stream
     });
 
     peer.on('signal', (data) => {
@@ -102,17 +99,6 @@ navigator.mediaDevices.getUserMedia({
     peer.on('data', (data) => {
         document.getElementById('messages').textContent += data + "\n"
     })
-
-    peer.on('stream', (stream) => {
-        let video = document.createElement('video')
-        document.body.appendChild(video)
-
-        video.src = window.URL.createObjectURL(stream)
-        video.play()
-    })
-}, (err) => {
-    console.error(err)
-});
 
 
 /***/ }),

@@ -1,7 +1,7 @@
-navigator.mediaDevices.getUserMedia({
-    video: true,
-    audio: false
-}, (stream) => {
+var getUserMedia = require('getusermedia')
+
+getUserMedia({ video: true, audio: false }, (err, stream) => {
+    if (err) return console.error(err)
 
     var Peer = require('simple-peer');
     var peer = new Peer({
@@ -35,6 +35,4 @@ navigator.mediaDevices.getUserMedia({
         video.src = window.URL.createObjectURL(stream)
         video.play()
     })
-}, (err) => {
-    console.error(err)
 });
